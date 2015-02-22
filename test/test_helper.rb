@@ -5,15 +5,23 @@ require "minitest/rails"
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
-# require "minitest/rails/capybara"
+require "minitest/rails/capybara"
+
+require 'minitest/reporters'
 
 # Uncomment for awesome colorful output
-# require "minitest/pride"
+require "minitest/pride"
+
+Minitest::Reporters.use!(
+  Minitest::Reporters::SpecReporter.new,
+  ENV,
+  Minitest.backtrace_filter
+)
 
 class ActiveSupport::TestCase
-    ActiveRecord::Migration.check_pending!
+  ActiveRecord::Migration.check_pending!
 
-    # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
+  # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
