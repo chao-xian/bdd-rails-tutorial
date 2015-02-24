@@ -21,8 +21,9 @@ module BddOnRails
     # config.i18n.default_locale = :de
     #
     # Use Minitest for generating new tests.
-    config.generators do |g|
-      g.test_framework :minitest, spec: true
-    end
+    # config.generators do |g|
+    #   # g.test_framework :minitest, spec: true
+    #   g.test_framework :minitest
+    # end
   end
 end

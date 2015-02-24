@@ -1,17 +1,13 @@
 require 'test_helper'
 
-describe 'ItemsController' do
-  describe 'GET :index' do
-    before do
-      get :index
-    end
+class ItemsControllerTest < ActionController::TestCase
+  def test_items
+    get :index
+    assert_template 'items/index'
+    assert_response :success
 
-    it 'renders items/index' do
-      must_render_template 'items/index'
-    end
-
-    it 'responds with success' do
-      must_respond_with :success
-    end
+    assert_not_nil assigns(:items)
+    item_ids = assigns(:items).map(&:id).sort
+    assert_equal item_ids, Item.pluck(:id).sort
   end
 end

@@ -1,8 +1,18 @@
 require "test_helper"
 
-feature "To Do List" do
-  scenario "displays a list of to-do items" do
+# Feature test
+class ToDoListTest < Capybara::Rails::TestCase
+  def test_display_list_of_todos
     visit root_path
-    page.must_have_css('.items')
+    assert page.must_have_css('.items')
+    within('.items') do
+      Item.find_each do |item|
+        selector = "#item-#{item.id}"
+        within(selector) do
+          assert page.has_content?(item.name)
+          assert page.has_content?(item.description)
+        end
+      end
+    end
   end
 end
