@@ -12,11 +12,10 @@ require 'minitest/reporters'
 # Uncomment for awesome colorful output
 require "minitest/pride"
 
-Minitest::Reporters.use!(
-  Minitest::Reporters::SpecReporter.new,
-  ENV,
-  Minitest.backtrace_filter
-)
+MiniTest::Reporters.use! [
+  MiniTest::Reporters::DefaultReporter.new,
+  MiniTest::Reporters::JUnitReporter.new
+]
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
